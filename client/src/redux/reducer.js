@@ -14,6 +14,7 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, countries: action.payload, copyCountries: action.payload };
         case GET_COUNTRY_BY_ACTIVITY:
             const filterName = (countryName) => {
+                console.log(action.payload)
                 let value = false
                 action.payload[0].forEach((country) => {
                     if (country.name === countryName) {

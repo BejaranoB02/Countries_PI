@@ -7,9 +7,10 @@ const Landing = () => {
     return (
         <div className={styles.containerLanding}>
             <img src={titleImg} alt="" />
-            <p className={styles.welcomeText}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis voluptates dolorem
-                nostrum quis odit? Odio autem commodi fugit. Praesentium accusamus repudiandae
-                veniam exercitationem non perferendis vero officia voluptatibus dolor ipsa.</p>
+            <p className={styles.welcomeText}>¡Bienvenidos al proyecto Countries! 
+            Countries, es un proyecto que ofrece servicios, como buscar países  y
+            acceder a su información, también podrás crear actividades turísticas
+            para realizar en estos países.  </p>
             <Link to="/home">
                 <button className={styles.buttonLanding} > Home </button>
             </Link>

@@ -26,10 +26,10 @@ const Filters = () => {
     }
 
     const handleSelectActivity = (event) => {   
-        const namesContries = activities.map((activity) =>{
-            if(event.target.value === activity.name){
-                return activity.Countries
-            }
+        const namesContries = []
+        activities.forEach((activity) => {
+            if(event.target.value === activity.name)
+            namesContries.push(activity.Countries)
         })
         dispatch(getCountriesByActivity(namesContries))
         setFiltersValue({ ...filtersValue, activity: event.target.value })

@@ -15,7 +15,6 @@ const Form = () => {
     const [inputCountryValue, setInputCountryValue] = useState("")
     const [addCountries, setAddCountries] = useState([])
     const [errors, setErrors] = useState({})
-    const [alert, setAlert] = useState("")
     const [duration, setDuration] = useState("0")
     const [infoActivity, setInfoActivity] = useState({
         name: "",
