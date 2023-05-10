@@ -1,0 +1,73 @@
+.detailContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../../images/countries_05.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;    
+    width: 100%;
+    min-height: 100%;
+    min-width: 100%;
+    position: fixed;
+    margin-top: 100px;
+}
+
+.flagContainer {
+    width: 450px;
+    background-color: rgba(22, 22, 22, 0.648);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.infoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 100px;
+    flex-grow: 2;
+}
+
+.flagImage{
+    border-radius: 20px;
+    height: 180px;
+    width: auto;
+}
+
+.nameText{
+    font-size: 30px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #FFF;
+}
+
+.infoTextContainer{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 540px;
+    height: 70px;
+    border-radius: 20px;
+    background-color: rgba(22, 22, 22, 0.648);
+}
+
+.infoText{
+    flex-grow: 1;
+    color: #FFF;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.infoIcon{
+    margin-left: 20px;
+    height: 45px;
+}

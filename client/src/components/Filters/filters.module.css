@@ -1,0 +1,45 @@
+.filter-container {
+    z-index: 1;
+}
+
+.filtersText {
+    margin-left: 6px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    color: #FFF;
+}
+
+.filtersSelect {
+    background-color: #9D9D9D;
+    border: none;
+    width: auto;
+    height: 28px;
+    border-radius: 20px;
+    font-size: 18px;
+    color: #FFF;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    transition-duration: 0.6s;
+}
+
+.buttonClean {
+    margin: 6px;
+    background-color: #9D9D9D;
+    border: none;
+    width: auto;
+    height: 28px;
+    border-radius: 20px;
+    font-size: 18px;
+    color: #FFF;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    transition-duration: 0.6s;
+}
+
+.buttonClean:hover {
+    background-color: #ffffff; /* Green */
+    color: #3b3b3b;
+}
+
+.filtersSelect:hover{
+    background-color: #ffffff; /* Green */
+    color: #3b3b3b;
+}

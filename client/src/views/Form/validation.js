@@ -9,6 +9,11 @@ const validation = (info) => {
     if (info.countries.length < 1){
         errors.countries = "Debe seleccionar por lo menos un país"
     }
+    let durationInMinutes = parseInt(info.duration.substring(0,2))*60
+    if(durationInMinutes > 720){
+        errors.duration = "La duracion no puede ser mayor a 12:00 horas"
+    }
+    
     return errors;
 }
 

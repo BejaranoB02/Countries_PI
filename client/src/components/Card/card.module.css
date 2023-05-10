@@ -1,18 +1,33 @@
 .cardContainer{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif  ;
     color:white;
-    margin: 25px;
     background-color: rgba(22, 22, 22, 0.648);
     border: 4px black;
     border-radius: 12px;
-    width: 350px;
-    height: 370px;
+    width: 280px;
+    height: 340px;
+    transition-duration: 0.5s;    
 }
 
 .flagImage{
-    width: 90%;
+    height: 120px;
+    width: auto;
+    margin-top: 20px;
     border-radius: 12px;
 }
+
+.linkCard{
+    margin-top: 50px;
+    width: 280px;
+    height: 340px;
+}
+
+.cardContainer:hover{
+    background-color: #ffffff;
+    color: #3b3b3b;
+    transform: scale(1.2);
+}   
