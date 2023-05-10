@@ -1,9 +1,10 @@
 .formBackground {
+    position: unset;
     display: flex;
     align-content: center;
     justify-content: center;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../../images/countries_05.jpg");
-    background-size: cover;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../../images/background.jpg");
+    background-size: 100%;
     background-attachment: fixed;
     background-position: center;
 }
@@ -15,6 +16,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 20px;
+    margin-bottom: 100px;
     margin-top: 150px;
     width: 900px;
     background-color: rgba(22, 22, 22, 0.648);

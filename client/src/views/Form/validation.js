@@ -13,7 +13,9 @@ const validation = (info) => {
     if(durationInMinutes > 720){
         errors.duration = "La duracion no puede ser mayor a 12:00 horas"
     }
-    
+    if(durationInMinutes < 1){
+        errors.duration = "La duracion no puede ser menor a 01:00 hora"
+    }    
     return errors;
 }
 

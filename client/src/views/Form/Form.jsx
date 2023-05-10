@@ -14,14 +14,12 @@ const Form = () => {
     const dispatch = useDispatch()
     const [inputCountryValue, setInputCountryValue] = useState("")
     const [addCountries, setAddCountries] = useState([])
-    const [errors, setErrors] = useState([])
-    const [time, setTime] = useState({
-        startTime: "00:00",
-        finishTime: "00:00",
-    })
+    const [errors, setErrors] = useState({})
+    const [alert, setAlert] = useState("")
+    const [duration, setDuration] = useState("0")
     const [infoActivity, setInfoActivity] = useState({
         name: "",
-        dificulty: "1",
+        dificulty: 1,
         duration: "00:00",
         season: "spring",
         countries: [],
@@ -29,7 +27,11 @@ const Form = () => {
 
     const fillInfoActivity = (event) => {
         const name = event.target.name;
-        const value = event.target.value;
+        let value = event.target.value;
+        if(event.target.name === "dificulty"){
+            value = parseInt(value)
+            console.log(value)
+        }
         setInfoActivity({ ...infoActivity, [name]: value })
         setErrors(validation({ ...infoActivity, [name]: value }))
 
@@ -59,8 +61,6 @@ const Form = () => {
                 setInputCountryValue("");
                 setInfoActivity({ ...infoActivity, countries: [...infoActivity.countries, id] })
                 setErrors(validation({ ...infoActivity, countries: [...infoActivity.countries, id] }))
-            } else {
-                setErrors({ ...errors, countries: `${result.name}, ya fue seleccionado` })
             }
         }
     }
@@ -71,34 +71,15 @@ const Form = () => {
         setErrors(validation({ ...infoActivity, countries: infoActivity.countries.filter((countryId) => countryId !== id) }))
     }
 
-    const calculateDuration = (event) => {
-        let totalStartMinutes = 0
-        let totalFinishMinutes = 24 * 60
-        let startTime = time.startTime
-        let finishTime = time.finishTime
-        if (event.target.name === "startTime") {
-            setTime({ ...time, startTime: event.target.value })
-            startTime = event.target.value
-        }
-        if (event.target.name === "finishTime") {
-            setTime({ ...time, finishTime: event.target.value })
-            finishTime = event.target.value
-        }
-        totalStartMinutes = parseInt(startTime.substring(0, 2)) * 60 + parseInt(startTime.substring(3))
-        totalFinishMinutes = parseInt(finishTime.substring(0, 2)) * 60 + parseInt(finishTime.substring(3))
-        console.log(startTime)
-        console.log(finishTime)
+    const handleDuration = (event) => {
+        
+        setDuration(event.target.value)
 
-        let hours = Math.floor((totalFinishMinutes - totalStartMinutes) / 60)
-        let minutes = (totalFinishMinutes - totalStartMinutes) - (hours * 60)
-
-        if (minutes < 10) {
-            minutes = "0" + minutes.toString()
-        } else {
-            minutes = minutes.toString()
-        }
-
-        let duration = hours.toString() + ":" + minutes
+        let hours = event.target.value
+        let duration = hours + ":00" 
+        if (event.target.value < 10){
+            duration = "0" + duration;
+        };
 
         setInfoActivity({ ...infoActivity, duration: duration })
         setErrors(validation({ ...infoActivity, duration: duration }))
@@ -109,22 +90,15 @@ const Form = () => {
     }, [])
 
     const postActivty = (event) => {
-        event.preventDefault()
-        axios.post("http://localhost:3001/activities", infoActivity)
-            .then(() => alert("La actividad fue creada con exito"))
-            .catch((error) => console.log(error.message))
-        setInfoActivity({
-            name: "",
-            dificulty: "1",
-            duration: "00:00",
-            season: "spring",
-            countries: [],
-        })
-        setAddCountries([])
-        setTime({
-            finishTime: "00:00",
-            startTime: "00:00",
-        })
+        if(errors.name || errors.countries || errors.duration){
+            alert("Los parametros de la actividad no son permitidos")
+            event.preventDefault()
+        }else{
+            event.preventDefault()
+            axios.post("http://localhost:3001/activities", infoActivity)
+                .then(() => alert("La actividad fue creada con exito"))
+                .catch((error) => console.log(error))
+        }        
     }
 
     let location = useLocation();
@@ -143,18 +117,16 @@ const Form = () => {
                     <div>
                         <label className={styles.textForm}>Dificultad: </label>
                         <select className={styles.optionsForm} name="dificulty" value={infoActivity.dificulty} onChange={fillInfoActivity}>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
                         </select>
                     </div>
                     <div>
-                        <label className={styles.textForm}>Hora de inicio: </label>
-                        <input className={styles.optionsForm} name="startTime" type="time" onChange={calculateDuration} value={time.startTime} />
-                        <label className={styles.textForm}>Hora fin: </label>
-                        <input className={styles.optionsForm} name="finishTime" type="time" onChange={calculateDuration} value={time.finishTime} />
+                        <label className={styles.textForm}>Duración: </label>
+                      <input type="number" className={styles.optionsForm} min={0} value={duration} onChange={handleDuration}/>
                         <div>
                             <label className={styles.textForm}>Duración total: </label>
                             <label className={styles.textForm}>{infoActivity.duration} Horas</label>
@@ -172,18 +144,18 @@ const Form = () => {
                     </div>
                     <div>
                         <div className={styles.addCountryContainer}>
-                        <label className={styles.textForm}>Selecciona el país o paises: </label>
-                        <input className={styles.optionsForm} list="data" type="text" value={inputCountryValue} onChange={handleChange} />
-                        <datalist id="data">
-                            {
-                                countries.map((country) => {
-                                    return <option>{country.name}</option >
-                                })
-                            }
-                        </datalist>
-                        <button className={styles.buttonAddCountry} type="button" onClick={() => { handleButtonCountries() }}>
-                            <img className={styles.buttonAddCountryIcon} src={addIcon} alt="" />
-                        </button>
+                            <label className={styles.textForm}>Selecciona el país o paises: </label>
+                            <input className={styles.optionsForm} list="data" type="text" value={inputCountryValue} onChange={handleChange} />
+                            <datalist id="data">
+                                {
+                                    countries.map((country) => {
+                                        return <option>{country.name}</option >
+                                    })
+                                }
+                            </datalist>
+                            <button className={styles.buttonAddCountry} type="button" onClick={() => { handleButtonCountries() }}>
+                                <img className={styles.buttonAddCountryIcon} src={addIcon} alt="" />
+                            </button>
                         </div>
                     </div>
                     <div>
@@ -192,9 +164,8 @@ const Form = () => {
                                 return (<button className={styles.buttonCountry} type="button" onClick={() => { deleteCountry(country.name, country.id) }}>{country.name} x</button>)
                             })
                         }
-                        {errors.countries ? <p className={styles.errorText}>{errors.countries}</p> : ""}
                     </div>
-                    <button className={styles.buttonCreateForm}  type="submit">Crear actividad</button>
+                    <button className={styles.buttonCreateForm}>Crear actividad</button>
                 </form>
             </div>
         </div>
