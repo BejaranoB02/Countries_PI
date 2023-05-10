@@ -7,6 +7,7 @@ const fillDB = () => {
         .then((data)=>{
             data.forEach((country) => {
                 const objCountry = {
+                    id: country.cca3,
                     name: country.translations.spa.common,
                     flagImage: country.flags[1],
                     continent: country.region ? country.region : "not found",
@@ -16,6 +17,7 @@ const fillDB = () => {
                     population: country.population,
                 }
                 Country.findOrCreate({where: {
+                    id: objCountry.id,
                     name: objCountry.name,
                     flagImage: objCountry.flagImage,
                     continent: objCountry.continent,

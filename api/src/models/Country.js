@@ -5,10 +5,8 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Country', {
     id:{
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: DataTypes.STRING,
       primaryKey: true,
-      allowNull: false,
     },    
     name: {
       type: DataTypes.STRING,

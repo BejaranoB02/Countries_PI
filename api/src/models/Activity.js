@@ -6,7 +6,6 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
-            allowNull: false,
         },
         name: {
             type: DataTypes.STRING,
@@ -15,6 +14,10 @@ module.exports = (sequelize) => {
         dificulty: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            validate:{
+                min: 1,
+                max: 5,     
+            }
         },
         duration: {
             type: DataTypes.TIME,
